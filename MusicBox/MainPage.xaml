@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="MusicBox.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MusicBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:entity="using:MusicBox.Entity"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot Background="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}" >
+            <Pivot.Title>
+                <Grid>
+                    <TextBlock Text="User Manager" Style="{ThemeResource SubheaderTextBlockStyle}"/>
+                </Grid>
+            </Pivot.Title>
+            <Pivot.RightHeader>
+                <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
+                    <AppBarButton Icon="Add"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Edit" />
+                    <AppBarButton Icon="Delete"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Save"/>
+                </CommandBar>
+            </Pivot.RightHeader>
+            <PivotItem Header="List User" Margin="0">
+                <ListView x:Name="MenuList"
+                          ItemsSource="{x:Bind Users, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="entity:User">
+                            <StackPanel
+                                Orientation="Horizontal" 
+                                Padding="12" 
+                                Tag="{Binding}"                                
+                                AutomationProperties.Name="{x:Bind Name}">
+                                <Image Source="{x:Bind Avatar}"
+                                       Height="50" Width="50" VerticalAlignment="Center"/>
+                                <TextBlock Text="{x:Bind Name}" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Margin="12,0,0,0"/>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </PivotItem>
+
+            <!-- UserForm Frame -->
+            <PivotItem Header="User">
+                <Frame x:Name="UserFrame">
+
+                </Frame>
+            </PivotItem>
+            <!-- /UserForm Frame             -->
+
+        </Pivot>
+    </Grid>
+</Page>
